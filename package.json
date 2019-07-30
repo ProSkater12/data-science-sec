@@ -12,7 +12,7 @@
     "build-server": "NODE_ENV=production webpack --config webpack.server.js",
     "build": "yarn clean & run-p build-client build-server",
     "start-node": "node app/server.js",
-    "test": "jest --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/registerServiceWorker.js"
+    "test": "jest --env=jsdom --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/registerServiceWorker.js"
   },
   "dependencies": {
     "@babel/core": "^7.4.5",
