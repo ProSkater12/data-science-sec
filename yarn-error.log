@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/local/bin/yarn upgrade
+  /usr/bin/node /usr/local/bin/yarn add codecov.io coveralls --dev
 
 PATH: 
   /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: EACCES: permission denied, unlink '/home/proskater/github/data-science-sec/node_modules/@babel/core/node_modules/debug/CHANGELOG.md'
+  Error: EACCES: permission denied, mkdir '/home/proskater/github/data-science-sec/node_modules/sshpk/node_modules'
 
 npm manifest: 
   {
@@ -31,7 +31,7 @@ npm manifest:
       "build-server": "NODE_ENV=production webpack --config webpack.server.js",
       "build": "yarn clean & run-p build-client build-server",
       "start-node": "node app/server.js",
-      "test": "jest"
+      "test": "jest --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/registerServiceWorker.js"
     },
     "dependencies": {
       "@babel/core": "^7.4.5",
