@@ -14,8 +14,6 @@ deploy:
   api_key:
     secure: "a3297cbc-40eb-4607-bf0f-d2c8b5688087"
 
-script: make test-coveralls
-
 after_success:
   - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
