@@ -15,7 +15,7 @@
     "test": "jest --env=jsdom --coverage --collectCoverageFrom=src/**/*js --collectCoverageFrom=!src/registerServiceWorker.js"
   },
   "engines":{
-    "yarn": "1.17.3"
+    "yarn": "1.15.2"
   },
   "dependencies": {
     "@babel/core": "^7.4.5",
