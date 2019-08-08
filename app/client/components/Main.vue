@@ -1,86 +1,69 @@
 <template>
-  <div>
-    <h1>Shopping list</h1>
-    <div v-for="item in items" v-bind:key="item.id" :class="$style.item">
-      <span>{{ item.title }}</span>
-      <span>
-        <button @click="onRemoveItem" :data-id="item.id">Remove</button>
-      </span>
-    </div>
+  <div id="app">
 
-    <div :class="$style.controls">
-      <input @value="title" @input="onChangeTitle" />
-      <button @click="addItem">Add item</button>
-      <button @click="addAsyncItem">Add item after one second</button>
-    </div>
+	<div class="container-navbar">
+  <b-button class="segmentation">сегментация</b-button>
+	hello</div>
+
+	<div class="container-left">
+	<button @click="show = false" :aria-expanded="show ? 'true' : 'false' ">
+    Камера
+  </button>
+  <button @click="show = true" :aria-expanded="show ? 'true' : 'false' ">
+    Импорт
+  </button>
+	<template v-if="show == true">
+  <div>
+    <p><file-select v-model="file"></file-select></p>
+    <p v-if="file">
+    <img :src="file">
+    {{file.name}}</p>
+  </div>
+	</template>
+  <template v-if="show == false">
+    <p>Hi, good boy</p>
+  </template>
+  </div>
+
+  <div class="container-main">
+  <form method="post" enctype="multipart/form-data" action="/upload">
+    <input type="file" name="file">
+    <input type="submit" value="Submit">
+</form>
+  </div>
+
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import {
-  MAIN__ITEM_ADD,
-  MAIN__ITEM_ADD_ASYNC,
-  MAIN__ITEM_DELELE,
-} from '../store/const/main';
+import FileSelect from './FileSelect.vue'
 
 export default {
-  metaInfo: {
-    title: 'Main page',
+  name: 'App',
+  components: {
+    FileSelect
   },
   data() {
-    return {
-      title: 'Default title',
-    };
+	return {
+    file: null,
+		show: true,
+	  }
   },
-  computed: {
-    ...mapState({
-      items: state => state.main.items,
-    }),
-  },
-
-  mounted: () => {
-    console.log('Mounted');
-  },
-
-  serverPrefetch() {
-    console.log('Run only on server');
-  },
-
   methods: {
-    addAsyncItem() {
-      const item = {
-        id: Math.floor(Math.random() * 100),
-        title: this.$data.title,
-      };
-
-      this.$store.dispatch(MAIN__ITEM_ADD_ASYNC, { item });
-    },
-    addItem() {
-      const item = {
-        id: Math.floor(Math.random() * 100),
-        title: this.$data.title,
-      };
-
-      return this.$store.commit(MAIN__ITEM_ADD, { item });
-    },
-    onChangeTitle(e) {
-      this.$data.title = e.target.value;
-    },
-    onRemoveItem(e) {
-      const id = +e.target.getAttribute('data-id');
-      return this.$store.commit(MAIN__ITEM_DELELE, { id });
-    },
-  },
-};
+  modificateImg: function(img) {
+    var context = this;
+    }
+  }
+}
 </script>
 
-<style module>
-.item {
-  padding: 3px 0;
+<style>
+@import './css/App.css';
+#app {
+  text-align: center;
+  color: #2c3e50;
+  background-color: #383838;
 }
 
-.controls {
-  margin-top: 12px;
-}
+
 </style>
