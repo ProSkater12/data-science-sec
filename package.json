@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "yarn run dev",
     "dev-client": "webpack-dev-server --config webpack.client.js",
     "dev-server": "webpack -w --config webpack.server.js & nodemon app/nodemon.js",
     "dev": "run-p dev-client dev-server",
