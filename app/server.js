@@ -14,6 +14,7 @@ const clientManifest = require('../dist/vue-ssr-client-manifest.json');
 
 const server = express();
 
+// с этим параметром код сборки будет выполняться в том же контексте, что и серверный процесс
 const renderer = createBundleRenderer(serverBundle, {
   runInNewContext: false,
   template,
@@ -21,6 +22,7 @@ const renderer = createBundleRenderer(serverBundle, {
   inject: false,
 });
 
+// в боевом проекте имеет смысл раздавать статику с nginx
 server.use('/dist', express.static(path.join(__dirname, '../dist')));
 
 server.get('*', (req, res) => {
